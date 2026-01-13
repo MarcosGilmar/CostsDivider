@@ -3,7 +3,7 @@ export const colors = {
         "white": "#FFFFFF",
         100: "#FAFAFA",
         200: "#E1E1E6",
-        300: "#92929A",
+        300: "##9CA3AF",
         400: "#585860",
         500: "#2A2A2D",
         600: "#1C1C22",
