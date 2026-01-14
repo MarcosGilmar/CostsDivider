@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { ScrollView, Text, View } from "react-native";
 import { schema } from "./schema";
 
-export interface RegisterFormParams {
+export interface FormRegisterParams {
     name: string
     email: string
     password: string
@@ -18,7 +18,7 @@ export function RegisterForm() {
         control,
         handleSubmit,
         formState
-    } = useForm<RegisterFormParams>({
+    } = useForm<FormRegisterParams>({
         defaultValues: {
             email: "",
             name: "",
