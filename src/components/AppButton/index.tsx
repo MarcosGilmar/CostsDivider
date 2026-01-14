@@ -8,21 +8,25 @@ type AppButtonMode = "green" | "black"
 interface AppButtonParams extends TouchableOpacityProps {
     mode?: AppButtonMode
     leftIcon?: keyof typeof MaterialIcons.glyphMap
+    width?: "default" | "variant" 
 }
 
-
-export function AppButton({children, mode = "green", leftIcon, ...rest}: PropsWithChildren<AppButtonParams>) {
+export function AppButton({children, mode = "green", leftIcon, width = "default", ...rest}: PropsWithChildren<AppButtonParams>) {
     return (
         <TouchableOpacity 
             {...rest}
-            className={clsx("w-full rounded-xl",
-            leftIcon && "flex-row justify-center",
-            mode === "green" ? "bg-green-600 border-green-200" : "bg-gray-700"
-
-
+            className={clsx("rounded-3xl h-12 items-center justify-center",
+            leftIcon && "flex-row justify-center gap-2 items-start",
+            mode === "green" ? "bg-green-600 border-green-200" : "bg-gray-700 border border-gray-600",
+            width === "default" ? "w-[82%]" : "w-full"
             )}
-        >
-            <Text>{children}</Text>
+        >   
+            {leftIcon && (
+                <MaterialIcons name={leftIcon} size={25} />
+            )}
+            <Text className={clsx(mode === "black" ? "text-white" : "")}>
+                {children}
+            </Text>
         </TouchableOpacity>
     )
 }

@@ -11,7 +11,7 @@ export function Login() {
 
     return (
         <DismissKeyboardView>
-            <View className="flex-1 w-full self-center justify-end ">
+            <View className="flex-1 w-full justify-end">
                 <AuthHeader />
                 <LoginForm />
             </View>

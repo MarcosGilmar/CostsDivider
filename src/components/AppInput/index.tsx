@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { clsx } from "clsx";
 
 import { colors } from "@/shared/colors";
+import { ErrorMessage } from "../ErrorMessage";
 
 interface AppInputParams<T extends FieldValues> extends TextInputProps {
     control: Control<T>
@@ -28,17 +29,18 @@ export function AppInput<T extends FieldValues>({
             setIsFocused(inputRef.current.isFocused())
         }
     }
-
+    
     return (
         <Controller 
             control={control}
             name={name}
-            render={({ field: { onChange, value }}) => {
+            render={({ field: { onChange, value }, fieldState: { error }}) => {
                 return (
+                    <View className="items-center w-full">
                         <Pressable 
                             onPress={() => inputRef.current?.focus()}
                             className={clsx(
-                                "flex-row items-center border border-gray-600 rounded-xl px-4 h-12 gap-3 mb-3 w-[82%]",
+                                "flex-row items-center bg-gray-900 border border-gray-600 rounded-xl px-4 h-12 gap-3 w-[82%]",
                                 isFocused ? "border-green-400" : "bg-gray-800"
                             )
                         }>
@@ -64,7 +66,11 @@ export function AppInput<T extends FieldValues>({
                                     </TouchableOpacity>
                                 )
                             }
-                        </Pressable>                    
+                        </Pressable>   
+                        {error && (
+                            <ErrorMessage>{error?.message}</ErrorMessage>
+                        )}
+                    </View>
                 )
             }}
         />
