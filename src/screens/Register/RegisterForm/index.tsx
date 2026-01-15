@@ -5,7 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { ScrollView, Text, View } from "react-native";
+import { AxiosError } from "axios";
+
 import { schema } from "./schema";
+import { useAuthContext } from "@/context/auth.context";
 
 export interface FormRegisterParams {
     name: string
@@ -29,8 +32,16 @@ export function RegisterForm() {
 
     const navigation = useNavigation<NavigationProp<PublicStackParamsList>>()
 
-    async function onSubmit() {
+    const {handleRegister} = useAuthContext()
 
+    async function onSubmit(userData: FormRegisterParams) {
+        try {
+            await handleRegister(userData)
+        } catch (error) {
+            if(error instanceof AxiosError) {
+                console.log(error.response?.data)
+            }
+        }
     }
 
     return (

@@ -7,6 +7,8 @@ import { AppInput } from "@/components/AppInput"
 import { AppButton } from "@/components/AppButton"
 import { PublicStackParamsList } from "@/routes/PublicRoutes"
 import { schema } from "./schema"
+import { useAuthContext } from "@/context/auth.context"
+import { AxiosError } from "axios"
 
 export interface FormLoginParams {
     email: string
@@ -28,8 +30,16 @@ export function LoginForm() {
 
     const navigation = useNavigation<NavigationProp<PublicStackParamsList>>()
 
-    async function onSubmit() {
+    const {handleAuthenticate} = useAuthContext()
 
+    async function onSubmit(userData: FormLoginParams) {
+        try {
+            await handleAuthenticate(userData)
+        } catch (error) {
+            if(error instanceof AxiosError) {
+                console.log(error.response?.data)
+            }
+        }
     }
 
     return (
