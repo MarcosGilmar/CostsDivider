@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Text, View } from "react-native"
+import { ActivityIndicator, Text, View } from "react-native"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { yupResolver } from "@hookform/resolvers/yup"
 
@@ -9,6 +9,9 @@ import { PublicStackParamsList } from "@/routes/PublicRoutes"
 import { schema } from "./schema"
 import { useAuthContext } from "@/context/auth.context"
 import { AxiosError } from "axios"
+import { AppError } from "@/shared/helpers/AppError"
+import { useSnackBarContext } from "@/context/snackbar.context"
+import { useHandleError } from "@/shared/hooks/useHandleError"
 
 export interface FormLoginParams {
     email: string
@@ -31,14 +34,15 @@ export function LoginForm() {
     const navigation = useNavigation<NavigationProp<PublicStackParamsList>>()
 
     const {handleAuthenticate} = useAuthContext()
+    const {notify} = useSnackBarContext()
+
+    const handleError = useHandleError()
 
     async function onSubmit(userData: FormLoginParams) {
         try {
             await handleAuthenticate(userData)
         } catch (error) {
-            if(error instanceof AxiosError) {
-                console.log(error.response?.data)
-            }
+            handleError(error, "Falha ao logar")
         }
     }
 
@@ -64,12 +68,14 @@ export function LoginForm() {
                 <AppButton
                     onPress={handleSubmit(onSubmit)}
                 >
-                    Entrar
+                    {
+                        isSubmitting ? <ActivityIndicator /> : "Entrar"
+                    }
                 </AppButton>
 
                 <View className="border-b border-gray-600 w-[82%]" />
                 
-                <View className="w-full justify-center items-center gap-4">
+                <View className="w-full justify-center items-center gap-4 mb-10" >
                     <Text className="text-gray-300">Ainda não tem cadastro?</Text>
                     <AppButton
                         mode="black"

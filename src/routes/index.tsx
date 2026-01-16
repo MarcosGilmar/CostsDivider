@@ -5,6 +5,7 @@ import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { useAuthContext } from "@/context/auth.context";
 import { Loading } from "@/screens/Loading";
+import { SnackBar } from "@/components/SnackBar";
 
 export function NavigationRoutes() {
     const [loading, setLoading] = useState(true)
@@ -14,7 +15,6 @@ export function NavigationRoutes() {
         if(loading) {
             return <Loading setLoading={setLoading}/>
         }
-
         if(!user || !token) {
             return <PublicRoutes />
         } else {
@@ -25,6 +25,7 @@ export function NavigationRoutes() {
     return (
         <NavigationContainer>
             <Routes />
+            <SnackBar />
         </NavigationContainer>
     )
 }

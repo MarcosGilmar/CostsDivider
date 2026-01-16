@@ -3,11 +3,14 @@ import "./src/styles/global.css";
 import { NavigationRoutes } from "@/routes";
 import { Login } from "./src/screens/Login";
 import { AuthContextProvider } from "@/context/auth.context";
+import { SnackBarContextProvider } from "@/context/snackbar.context";
 
 export default function App() {
   return (
-    <AuthContextProvider>
-      <NavigationRoutes />
-    </AuthContextProvider>
+    <SnackBarContextProvider>
+      <AuthContextProvider>
+        <NavigationRoutes />
+      </AuthContextProvider>
+    </SnackBarContextProvider>
   );
 }

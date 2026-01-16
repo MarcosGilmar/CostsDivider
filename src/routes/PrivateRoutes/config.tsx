@@ -3,10 +3,29 @@ import { MaterialIcons } from "@expo/vector-icons"
 import { Image, TouchableOpacity } from "react-native"
 import { PrivateParamsList } from "."
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs"
+import { useAuthContext } from "@/context/auth.context"
 
 type RouteConfig = {
     route: {name: keyof PrivateParamsList}
 }
+
+export function Logout() {
+    const {handleLogout} = useAuthContext()
+
+    return (
+        <TouchableOpacity 
+            className='mx-5'
+            onPress={handleLogout}
+        >
+            <MaterialIcons 
+                name="logout" 
+                color={colors.feedback['danger-light']}
+                size={25}    
+            />
+        </TouchableOpacity>
+    )
+}
+
 
 export const privateScreenOptions = ({route}: RouteConfig): BottomTabNavigationOptions => ({
     headerStyle: {
@@ -46,15 +65,6 @@ export const privateScreenOptions = ({route}: RouteConfig): BottomTabNavigationO
     },
     headerTitle: () => <Image source={require("@/assets/Header-Logo.png")}/>,
     headerRight: () => (
-        <TouchableOpacity 
-            className='mx-5'
-            // onPress={}
-        >
-            <MaterialIcons 
-                name="logout" 
-                color={colors.feedback['danger-light']}
-                size={25}    
-            />
-        </TouchableOpacity>
+        <Logout />
     )
 })              
