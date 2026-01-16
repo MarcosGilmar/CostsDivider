@@ -18,7 +18,7 @@ export function AppButton({children, mode = "green", leftIcon, width = "default"
             className={clsx("rounded-3xl h-12 items-center justify-center",
             leftIcon && "flex-row justify-center gap-2 items-start",
             mode === "green" ? "bg-green-600 border-green-200" : "bg-gray-700 border border-gray-600",
-            width === "default" ? "w-[82%]" : "w-full"
+            width === "default" ? "w-[82%]" : "w-[110px]"
             )}
         >   
             {leftIcon && (

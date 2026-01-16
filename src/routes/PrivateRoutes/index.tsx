@@ -9,9 +9,9 @@ import { colors } from '@/shared/colors';
 import { privateScreenOptions } from './config';
 
 export type PrivateParamsList = {
-    Activities: undefined
-    Summary: undefined
-    Participants: undefined
+    Atividades: undefined
+    Resumo: undefined
+    Participantes: undefined
 }
 
 const PrivateTab = createBottomTabNavigator<PrivateParamsList>()
@@ -19,12 +19,12 @@ const PrivateTab = createBottomTabNavigator<PrivateParamsList>()
 export function PrivateRoutes() {
     return (
         <PrivateTab.Navigator
-            initialRouteName='Activities'
+            initialRouteName='Atividades'
             screenOptions={privateScreenOptions}
         >
-            <PrivateTab.Screen name="Activities" component={Activities}/>
-            <PrivateTab.Screen name="Summary" component={Summary}/>
-            <PrivateTab.Screen name="Participants" component={Participants}/>
+            <PrivateTab.Screen name="Atividades" component={Activities}/>
+            <PrivateTab.Screen name="Resumo" component={Summary}/>
+            <PrivateTab.Screen name="Participantes" component={Participants}/>
         </PrivateTab.Navigator>
     )
 }

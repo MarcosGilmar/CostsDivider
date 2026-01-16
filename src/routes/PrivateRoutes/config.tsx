@@ -33,6 +33,7 @@ export const privateScreenOptions = ({route}: RouteConfig): BottomTabNavigationO
     },
     tabBarStyle: {
         height: 97,
+        borderTopWidth: 0,
     },
     tabBarIconStyle: {
         marginBottom: 0,
@@ -48,9 +49,9 @@ export const privateScreenOptions = ({route}: RouteConfig): BottomTabNavigationO
     tabBarIcon: ({focused}) => {
         let iconName: keyof typeof MaterialIcons.glyphMap
         
-        if(route.name === "Summary") {
+        if(route.name === "Resumo") {
             iconName = "pie-chart"
-        } else if (route.name === "Participants"){
+        } else if (route.name === "Participantes"){
             iconName = "supervised-user-circle"
         } else {
             iconName = "format-list-bulleted"
