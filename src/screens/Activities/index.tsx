@@ -1,11 +1,11 @@
 import { AppButton } from "@/components/AppButton"
-import { View, Text } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { ActivityModal } from "./ActivityModal"
 import { useState } from "react"
+import { useBottomSheetContext } from "@/context/bottom-sheet.context"
 
 export function Activities() {
-
     const [modalVisible, setModalVisible] = useState(false)
 
     function showModal() {

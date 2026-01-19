@@ -26,7 +26,6 @@ export function Logout() {
     )
 }
 
-
 export const privateScreenOptions = ({route}: RouteConfig): BottomTabNavigationOptions => ({
     headerStyle: {
         backgroundColor: "#111827"             
