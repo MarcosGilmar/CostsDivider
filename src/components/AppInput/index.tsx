@@ -3,14 +3,17 @@ import { Pressable, TextInput, TextInputProps, TouchableOpacity, View } from "re
 import { MaterialIcons } from "@expo/vector-icons"
 import { useRef, useState } from "react";
 import { clsx } from "clsx";
+import RNDateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 
 import { colors } from "@/shared/colors";
 import { ErrorMessage } from "../ErrorMessage";
+import { formatDate } from "@/shared/helpers/formatDate";
 
 interface AppInputParams<T extends FieldValues> extends TextInputProps {
     control: Control<T>
     name: Path<T>
     leftIconName?: keyof typeof MaterialIcons.glyphMap
+    datePicker?: boolean
 }
 
 export function AppInput<T extends FieldValues>({
@@ -18,8 +21,10 @@ export function AppInput<T extends FieldValues>({
     name,
     leftIconName,
     secureTextEntry,
+    datePicker,
     ...rest
 }: AppInputParams<T>) {
+    const [showDatePicker, setShowDatePicker] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
     const [showText, setShowText] = useState(false)
     const inputRef = useRef<TextInput>(null)
@@ -46,18 +51,43 @@ export function AppInput<T extends FieldValues>({
                         }>
                             {leftIconName && <MaterialIcons name={leftIconName} color={isFocused ? colors.accent["green-light"] : colors.gray[200]} size={15}/>}
                             
-                            <TextInput 
-                                className="flex-1 text-base"
-                                style={{ color:colors.gray[400]}}
-                                value={value}
-                                onChangeText={onChange}
-                                placeholderTextColor={colors.gray[400]}
-                                onFocus={CheckFocus}
-                                onEndEditing={CheckFocus}
-                                secureTextEntry={secureTextEntry && !showText}
-                                ref={inputRef}
-                                {...rest}
-                            />
+                            { datePicker ? (
+                                <>
+                                    <TextInput 
+                                        className="flex-1 text-base"
+                                        value={value ? formatDate(value) : ""}
+                                        onPressIn={() => setShowDatePicker(true)}
+                                        style={{ color: colors.gray[400]}}
+                                    />
+                                    { showDatePicker && (
+                                        <RNDateTimePicker 
+                                            value={value}
+                                            mode="date"
+                                            onChange={(event: DateTimePickerEvent, date?: Date) => {
+                                                setShowDatePicker(false)
+
+                                                if(date) {
+                                                    onChange(date)
+                                                }
+                                            }}
+                                        />
+                                    )}
+                                </>
+                                ) : (
+                                    <TextInput 
+                                        className="flex-1 text-base"
+                                        style={{ color:colors.gray[400]}}
+                                        value={value}
+                                        onChangeText={onChange}
+                                        placeholderTextColor={colors.gray[400]}
+                                        onFocus={CheckFocus}
+                                        onEndEditing={CheckFocus}
+                                        secureTextEntry={secureTextEntry && !showText}
+                                        ref={inputRef}
+                                        {...rest}
+                                    /> 
+                                )
+                            }
 
                             {
                                 secureTextEntry && (
