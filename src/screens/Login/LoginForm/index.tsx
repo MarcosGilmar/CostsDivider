@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form"
 import { ActivityIndicator, Text, View } from "react-native"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { AxiosError } from "axios"
 
 import { AppInput } from "@/components/AppInput"
 import { AppButton } from "@/components/AppButton"
 import { PublicStackParamsList } from "@/routes/PublicRoutes"
 import { schema } from "./schema"
 import { useAuthContext } from "@/context/auth.context"
-import { AxiosError } from "axios"
 import { AppError } from "@/shared/helpers/AppError"
 import { useSnackBarContext } from "@/context/snackbar.context"
 import { useHandleError } from "@/shared/hooks/useHandleError"
@@ -34,7 +34,6 @@ export function LoginForm() {
     const navigation = useNavigation<NavigationProp<PublicStackParamsList>>()
 
     const {handleAuthenticate} = useAuthContext()
-    const {notify} = useSnackBarContext()
 
     const handleError = useHandleError()
 

@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { ActivityModal } from "./ActivityModal"
 import { useState } from "react"
 import { useBottomSheetContext } from "@/context/bottom-sheet.context"
+import { CreateActivityInterface } from "@/shared/interfaces/https/create-activity"
 
 export function Activities() {
     const [modalVisible, setModalVisible] = useState(false)

@@ -3,9 +3,9 @@ import { FormRegisterParams } from "@/screens/Register/RegisterForm"
 import { createContext, ReactNode, useContext, useState } from "react"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import * as authService from "@/shared/services/costs-divider/auth.service"
+import * as authService from "@/shared/services/costs-divider/auth-service"
 import { IUser } from "@/shared/interfaces/user-interface"
-import { IAuthenticateResponse } from "@/shared/interfaces/https/authenticate.response";
+import { IAuthenticateResponse } from "@/shared/interfaces/https/authenticate-response";
 
 export type AuthContextType = {
     user: IUser | null
