@@ -19,7 +19,7 @@ costsDivider.interceptors.request.use(async (config) => {
         const { token } = JSON.parse(getData)
 
         if(token) {
-            config.headers.Authorization = `Beared ${token}`
+            config.headers.Authorization = `Bearer ${token}`
         }
     }
     

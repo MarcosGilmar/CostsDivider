@@ -46,7 +46,9 @@ export function AuthContextProvider({ children}: {children: ReactNode}) {
         const userData = await AsyncStorage.getItem("costs-divider")
 
         if(userData) {
-            const {token, ...user} = JSON.parse(userData) as IAuthenticateResponse
+            const parsed = JSON.parse(userData)
+
+            const {token, user} = parsed
             setUser(user)
             setToken(token)
         }   

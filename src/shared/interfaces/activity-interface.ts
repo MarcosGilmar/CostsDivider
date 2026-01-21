@@ -6,6 +6,7 @@ export interface IActivity {
     id: string
     name: string
     createdAt: string
+    updatedAt: string
 }
 
 export interface IActivitySummary {

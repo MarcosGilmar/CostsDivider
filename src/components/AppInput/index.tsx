@@ -41,7 +41,7 @@ export function AppInput<T extends FieldValues>({
             name={name}
             render={({ field: { onChange, value }, fieldState: { error }}) => {
                 return (
-                    <View className="items-center w-full">
+                    <View className="w-full items-center">
                         <Pressable 
                             onPress={() => inputRef.current?.focus()}
                             className={clsx(
